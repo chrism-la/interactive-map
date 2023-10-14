@@ -49,7 +49,7 @@ let options = {
     },
 };
 async function fetchPlaces() {
-    let response = await fetch('https://api.foursquare.com/v3/places/search', options);
+    let response = await fetch(fetch(`https://cors-anywhere.herokuapp.com/https://api.foursquare.com/v3/places/search?&query=coffee&limit=5&ll=41.8781%2C-87.6298`, options), options);
     let places = response.json().catch((err) => console.error(err));
     return places;
 }
@@ -60,4 +60,6 @@ document.getElementById('submit').addEventListener('click', function (e) {
     submitButton();
 });
 
-function submitButton() {}
+function submitButton() {
+    let business = document.getElementById('business').value;
+}

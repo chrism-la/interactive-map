@@ -1,17 +1,36 @@
-// create Map
-const myMap = L.map('map', {
-    center: [34.0206085, -118.741372],
-    zoom: 8,
-});
+// when page load request user location
+// Version 1
+// window.onload = () => {
+//     getUserCoordinates();
+// };
+// Version 2 add async await
+window.onload = async () => {
+    // store array of coordinates into a variable to use
+    const coordinates = await getUserCoordinates();
+    // initialize map with coordinates
+    myMap.createMap(coordinates);
+};
 
-// Create Tile Layer
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(myMap);
+// create Map Object
+const myMap = {
+    // create properties
+    createMap: function (coordinates) {
+        // Create Map
+        const map = L.map('map', {
+            center: coordinates,
+            zoom: 8,
+        });
 
-// Create Marker
-const marker = L.marker([34.0206085, -118.741372]);
-marker.addTo(myMap).bindPopup('<p1><b>You Are Here</b></p1>').openPopup();
+        // Create Tile Layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        // Create Marker
+        const marker = L.marker(coordinates);
+        marker.addTo(map).bindPopup('<p1><b>You Are Here</b></p1>').openPopup();
+    },
+};
 
 // function to retrieve user location
 async function getUserCoordinates() {
@@ -21,15 +40,20 @@ async function getUserCoordinates() {
     return [position.coords.latitude, position.coords.longitude];
 }
 
-// when page load request user location
-// then initialize map
-// listen for events on the menu
-// then apply the foursquare
 
-// map object
-// get coords via geolocation
-// get foursquare busin
-// process foursquare array
-// event handlers
-// window load
-// business submit
+
+fsq38ehzQYXJWUofH6JJmG/eQLbeV8erEZ3VsRnLgi3afI8=
+
+
+const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'fsq38ehzQYXJWUofH6JJmG/eQLbeV8erEZ3VsRnLgi3afI8='
+    }
+  };
+  
+  fetch('https://api.foursquare.com/v3/places/search', options)
+    .then(response => response.json())
+    .then(response => console.log(response))
+    .catch(err => console.error(err));

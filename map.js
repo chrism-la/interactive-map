@@ -57,3 +57,9 @@ const options = {
     .then(response => response.json())
     .then(response => console.log(response))
     .catch(err => console.error(err));
+
+
+// configure submit button 
+document.getElementById('submit').addEventListener('click', function(e){
+    (e).preventDefault()
+})

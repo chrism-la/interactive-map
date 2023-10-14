@@ -40,26 +40,24 @@ async function getUserCoordinates() {
     return [position.coords.latitude, position.coords.longitude];
 }
 
-
-
-fsq38ehzQYXJWUofH6JJmG/eQLbeV8erEZ3VsRnLgi3afI8=
-
-
-const options = {
+// fourSquare API
+let options = {
     method: 'GET',
     headers: {
-      accept: 'application/json',
-      Authorization: 'fsq38ehzQYXJWUofH6JJmG/eQLbeV8erEZ3VsRnLgi3afI8='
-    }
-  };
-  
-  fetch('https://api.foursquare.com/v3/places/search', options)
-    .then(response => response.json())
-    .then(response => console.log(response))
-    .catch(err => console.error(err));
+        Accept: 'application/json',
+        Authorization: 'fsq38ehzQYXJWUofH6JJmG/eQLbeV8erEZ3VsRnLgi3afI8=',
+    },
+};
+async function fetchPlaces() {
+    let response = await fetch('https://api.foursquare.com/v3/places/search', options);
+    let places = response.json().catch((err) => console.error(err));
+    return places;
+}
 
+// configure submit button
+document.getElementById('submit').addEventListener('click', function (e) {
+    e.preventDefault();
+    submitButton();
+});
 
-// configure submit button 
-document.getElementById('submit').addEventListener('click', function(e){
-    (e).preventDefault()
-})
+function submitButton() {}
